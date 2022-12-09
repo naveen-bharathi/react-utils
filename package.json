@@ -1,0 +1,19 @@
+{
+  "name": "@naveen-bharathi/react-utils",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naveen-bharathi/react-utils.git"
+  },
+  "author": "Naveen Bharathi",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/prettier": "^2.7.1",
+    "eslint": "^8.29.0",
+    "eslint-plugin-react": "^7.31.11",
+    "glob": "^8.0.3",
+    "path": "^0.12.7",
+    "prettier": "^2.8.1",
+    "typescript-to-proptypes": "^2.2.1"
+  }
+}
