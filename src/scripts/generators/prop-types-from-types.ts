@@ -1,47 +1,48 @@
-const fs = require('fs')
-const path = require('path')
-const prettier = require('prettier')
-const glob = require('glob')
-const ttp = require('typescript-to-proptypes')
+import type { Config as PrettierConfig } from 'prettier'
+import type { ts } from 'typescript-to-proptypes'
 
-function getComponentName(componentDirName) {
+import fs from 'fs'
+import path from 'path'
+import prettier from 'prettier'
+import glob from 'glob'
+import * as ttp from 'typescript-to-proptypes'
+
+function getComponentName(componentDirName: string) {
   return componentDirName.split('/')[componentDirName.split('/').length - 1]
 }
 
-function getComponentJSXName(componentName) {
+function getComponentJSXName(componentName: string) {
   return componentName
     .split('-')
     .map((e) => (`${e[0].toUpperCase()}${e.slice(1, e.length)}`))
     .join('')
 }
 
-function replacePropTypesExport(propTypes) {
+function replacePropTypesExport(propTypes: string) {
   return propTypes.replace(/([z-zA-Z])\w+.propTypes/g, '')
 }
 
-function isServerComponent(componentName, componentDirName) {
+function isServerComponent(componentName: string, componentDirName: string) {
   return fs.existsSync(path.join(
     componentDirName,
     `${componentName}.server.tsx`,
   ))
 }
 
-function isClientComponent(componentName, componentDirName) {
+function isClientComponent(componentName: string, componentDirName: string) {
   return fs.existsSync(path.join(
     componentDirName,
     `${componentName}.client.tsx`,
   ))
 }
 
-function setPropTypes(...params) {
-  const [
-    componentName,
-    componentDirName,
-    componentJSXName,
-    propTypes,
-    prettierConfig,
-  ] = params
-
+function setPropTypes(
+  componentName: string,
+  componentDirName: string,
+  componentJSXName: string,
+  propTypes: string,
+  prettierConfig: PrettierConfig,
+) {
   const componentFilePath = path.join(
     componentDirName,
     componentName + (
@@ -92,7 +93,7 @@ function setPropTypes(...params) {
   }
 }
 
-function setPropTypesDef(componentDirName, componentJSXName) {
+function setPropTypesDef(componentDirName: string, componentJSXName: string) {
   const filePath = path.join(componentDirName, 'index.d.ts')
   const fileContent = `
     import type { TProps } from './types'
@@ -102,14 +103,12 @@ function setPropTypesDef(componentDirName, componentJSXName) {
   fs.writeFileSync(filePath, fileContent)
 }
 
-function setComponentExport(...params) {
-  const [
-    componentName,
-    componentDirName,
-    componentJSXName,
-    prettierConfig,
-  ] = params
-
+function setComponentExport(
+  componentName: string,
+  componentDirName: string,
+  componentJSXName: string,
+  prettierConfig: PrettierConfig,
+) {
   const fileName = (
     isServerComponent(componentName, componentDirName)
       ? `${componentName}.server`
@@ -143,7 +142,11 @@ function setComponentExport(...params) {
   )
 }
 
-function generatePropTypes(componentPaths, ttpProgram, prettierConfig) {
+function generatePropTypes(
+  componentPaths: string[],
+  ttpProgram: ts.Program,
+  prettierConfig: PrettierConfig,
+) {
   componentPaths.forEach((componentPath) => {
     const componentDirName = path.dirname(componentPath)
     const componentName = getComponentName(componentDirName)
@@ -189,13 +192,11 @@ function generatePropTypes(componentPaths, ttpProgram, prettierConfig) {
   })
 }
 
-function generatePropTypesFromTypes(...params) {
-  const [
-    componentDirectories,
-    prettierConfig,
-    tsCompilerOptions,
-  ] = params
-
+export function generatePropTypesFromTypes(
+  componentDirectories: string[],
+  prettierConfig: PrettierConfig,
+  tsCompilerOptions: ts.CompilerOptions,
+) {
   const componentDirs = []
   const componentPaths = []
 
@@ -234,8 +235,4 @@ function generatePropTypesFromTypes(...params) {
   componentPaths.forEach((componentPath) => {
     fs.rmSync(componentPath)
   })
-}
-
-module.exports = {
-  generatePropTypesFromTypes
 }

@@ -1,11 +1,11 @@
-function makeImageSizeForMediaQuery(mediaQuery, width) {
+function makeImageSizeForMediaQuery(query: string, width: string | number) {
   return [
-    mediaQuery.includes(') ') ? `(${mediaQuery})` : mediaQuery,
+    query.includes(') ') ? `(${query})` : query,
     `${width}${(typeof width === 'number') ? 'px' : ''}`,
   ].join(' ')
 }
 
-function makeImageSizes(sizes) {
+export function makeImageSizes(sizes: (number | [string, string | number])[]) {
   return (
     sizes
       .map((sizeOrWidth) => {
@@ -18,5 +18,3 @@ function makeImageSizes(sizes) {
       .join(', ')
   )
 }
-
-module.exports = { makeImageSizes }
