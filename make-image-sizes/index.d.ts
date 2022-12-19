@@ -1,1 +1,3 @@
-export function makeImageSizes(sizes: (number | [string, string | number])[]): string
+declare function makeImageSizes(sizes: (number | [string, string | number])[]): string;
+
+export { makeImageSizes };
