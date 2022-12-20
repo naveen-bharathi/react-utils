@@ -1,18 +1,19 @@
-const fs = require('fs')
-const prettier = require('prettier')
+import fs from 'fs'
+import prettier from 'prettier'
+import packageJson from '../package.json' assert { type: 'json' }
 
 const sourceDirectory = './src'
-const packageJson = require('../package.json')
 const prettierConfig = prettier.resolveConfig.sync('./.prettierrc.json')
 const gitIgnoreContent = fs.readFileSync('./.gitignore', 'utf8')
-const gitIgnoreContentStartText = '# start:build-output-directories-to-ignore'
-const gitIgnoreContentEndText = '# end:build-output-directories-to-ignore'
+const gitIgnoreContentStartText = '# start:build-output-to-ignore'
+const gitIgnoreContentEndText = '# end:build-output-to-ignore'
 
 function setOutputDirectories() {
   const contentsInSource = fs.readdirSync(sourceDirectory)
   const startIndex = gitIgnoreContent.indexOf(gitIgnoreContentStartText)
   const endIndex = gitIgnoreContent.indexOf(gitIgnoreContentEndText)
 
+  contentsInSource.push('build')
   contentsInSource.push('*.d.ts')
 
   const updatedGitIgnoreContent = (

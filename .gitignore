@@ -1,23 +1,12 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-deb
+# start:build-output-to-ignore
 /make-image-sizes
 /next
 /scripts
 /types
+/build
 /*.d.ts
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-deb
-/make-image-sizes
-/next
-/scripts
-/types
-/*.d.ts
+# end:build-output-to-ignore
+
 # Logs
 logs
 *.log

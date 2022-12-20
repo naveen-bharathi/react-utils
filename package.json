@@ -13,14 +13,15 @@
     "postpublish": "npm run cleanup",
     "cleanup": "sh .scripts/cleanup.sh",
     "copy-types": "sh .scripts/copy-types.sh",
-    "generate:prop-types": "ts-node .scripts/generate-prop-types-from-types.ts",
-    "set:output-directories": "node .scripts/set-output-directories.js"
+    "generate:prop-types": "GENERATE_PROP_TYPES_FROM_TYPES=true tsup; node .scripts/generate-prop-types-from-types.mjs; npm run cleanup",
+    "set:output-directories": "node .scripts/set-output-directories.mjs"
   },
   "files": [
     "make-image-sizes",
     "next",
     "scripts",
     "types",
+    "build",
     "*.d.ts"
   ],
   "devDependencies": {

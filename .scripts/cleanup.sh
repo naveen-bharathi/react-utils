@@ -1,1 +1,1 @@
-rm -rf make-image-sizes next scripts types *.d.ts
+rm -rf make-image-sizes next scripts types build *.d.ts

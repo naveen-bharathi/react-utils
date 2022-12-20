@@ -3,7 +3,17 @@ import glob from 'glob';
 
 export const tsup = defineConfig({
   dts: true,
-  entry: glob.sync('src/**/!(types)/!(types).ts'),
+  ...(
+    (process.env.GENERATE_PROP_TYPES_FROM_TYPES === 'true')
+      ? {
+        entry: {
+          'build/prop-types-from-types': 'src/scripts/prop-types-from-types.ts',
+        },
+      }
+      : {
+        entry: glob.sync('src/**/!(types)/!(types).ts'),
+      }
+  ),
   external: [
     'dayjs',
     'fs',
