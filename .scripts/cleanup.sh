@@ -1,0 +1,1 @@
+rm -rf make-image-sizes next types *.d.ts

@@ -1,0 +1,44 @@
+{
+  "name": "@naveen-bharathi/react-utils",
+  "version": "1.0.6",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naveen-bharathi/react-utils.git"
+  },
+  "author": "Naveen Bharathi",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run generate:prop-types-from-types && npm run set:output-locations && npm run cleanup && tsup && npm run copy-types",
+    "prepublishOnly": "npm run cleanup && npm run build",
+    "postpublish": "npm run cleanup",
+    "cleanup": "sh .scripts/cleanup.sh",
+    "copy-types": "sh .scripts/copy-types.sh",
+    "generate:prop-types-from-types": "node .scripts/generate-prop-types-from-types.js",
+    "set:output-locations": "node .scripts/set-output-locations.js"
+  },
+  "files": [
+    "make-image-sizes",
+    "next",
+    "types",
+    "*.d.ts"
+  ],
+  "devDependencies": {
+    "@naveen-bharathi/scripts": "^1.0.1",
+    "@types/glob": "^8.0.0",
+    "@types/prettier": "^2.7.2",
+    "@types/react": "^18.0.26",
+    "@types/xml": "^1.0.8",
+    "dayjs": "^1.11.7",
+    "eslint": "^8.30.0",
+    "eslint-plugin-react": "^7.31.11",
+    "glob": "^8.0.3",
+    "next": "^13.0.7",
+    "path": "^0.12.7",
+    "prettier": "^2.8.1",
+    "react": "^18.2.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4",
+    "typescript-to-proptypes": "^2.2.1",
+    "xml": "^1.0.1"
+  }
+}

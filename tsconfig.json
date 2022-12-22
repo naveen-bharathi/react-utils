@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "paths": {
+      "@/next/*": [
+        "src/next/*"
+      ],
+      "@/types/*": [
+        "src/types/*"
+      ],
+    }
+  }
+}
